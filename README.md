@@ -1,6 +1,6 @@
 <div align="center">
 
-# Explainable early warning of mortgage credit risk
+# Development of an explainable AI model for early detection of credit risk and hidden deterioration of borrowers
 
 ### Research internship: data, code, figures and report
 
