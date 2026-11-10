@@ -49,6 +49,7 @@ Test 2018: 3,758,886 observations, 7,824 defaults; alert list = calibrated PD �
 
 - **H3 confirmed:** dynamic features add +0.015 AUC [0.013; 0.017] and raise alerts for 36 % of future defaults instead of 26 %; median lead time 10 months.
 - **H4 partial:** weighting by the loan balance keeps calibration but does not raise the captured loss (−0.5 pp). **H2** holds with a small effect.
+- **How risk is shown:** the calibrated PD next to the relative risk, the percentile in the portfolio and a risk class 1–10 (the alert list = classes 7–10), e.g. *PD 1.55 % · 7.5 times the average · riskier than 98 % of the portfolio · class 7*; the default rate on test rises in every class, from 0.02 % to 3.6 % ([`risk_scale_grades.csv`](Неделя_07_Базовые_модели/tables/test/risk_scale_grades.csv)).
 - **Explanations:** CatBoost's built-in SHAP is not additive for depthwise trees deeper than 2, so exact permutation SHAP is used; reason codes are dominated by FICO and the co-borrower; LIME agrees on the top feature but is less stable (local R² 0.16).
 
 Sources: [`comparison_table.csv`](Неделя_07_Базовые_модели/tables/test/comparison_table.csv), [`alert_capture.csv`](Неделя_07_Базовые_модели/tables/test/alert_capture.csv), [`h3_verdict.csv`](Неделя_07_Базовые_модели/tables/test/h3_verdict.csv), [`h4_verdict.csv`](Неделя_07_Базовые_модели/tables/test/h4_verdict.csv).
@@ -65,7 +66,7 @@ Sources: [`comparison_table.csv`](Неделя_07_Базовые_модели/ta
 | [04](Неделя_04_Данные) | Data collection | data description, data audit report, dictionary of 59 features, audit notebook and tables |
 | [05](Неделя_05_Очистка_и_признаки) | Data preparation | feature selection 59 → 18: description, report, 10 notebooks, tables |
 | [06](Неделя_06_Разведочный_анализ) | Exploratory analysis | EDA notebook, 7 figures, tables; description — section 5.1 of the [chapter on EDA and model interpretation](Неделя_08_Объяснимый_ИИ/Разведочный_анализ_и_интерпретация_модели.md) (in week 08) |
-| [07](Неделя_07_Базовые_модели) | Modelling | models and test results, test protocol, 11 notebooks, metric tables, figure and its script |
+| [07](Неделя_07_Базовые_модели) | Modelling | models and test results, test protocol, 12 notebooks (incl. the risk scale), metric tables, figure and its script |
 | [08](Неделя_08_Объяснимый_ИИ) | Modelling (XAI) | [chapter on EDA and model interpretation](Неделя_08_Объяснимый_ИИ/Разведочный_анализ_и_интерпретация_модели.md), SHAP and LIME notebook, 5 figures, tables |
 | [09](Неделя_09_Аналитическая_записка) | Analysis of results | analytical note with interim conclusions and plan |
 | [10](Неделя_10_Отчет) | Final stage | research internship report (.docx) |
