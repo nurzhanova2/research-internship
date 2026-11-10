@@ -13,6 +13,8 @@ Astana IT University, Astana, Kazakhstan · Applied Data Analytics (7M06103)
 [![data — Fannie Mae, 2006–2025](https://img.shields.io/badge/data-Fannie%20Mae%2C%202006%E2%80%932025-1565c0)](Неделя_04_Данные/Описание_данных.md)
 [![task — first default within 12 months](https://img.shields.io/badge/task-first%20default%20within%2012%20months-6a1b9a)](Неделя_01_Организационный_этап/Цели_и_задачи.md)
 [![model — CatBoost · SHAP](https://img.shields.io/badge/model-CatBoost%20%C2%B7%20SHAP-455a64)](Неделя_07_Базовые_модели/Результаты_моделирования.md)
+[![code — MIT](https://img.shields.io/badge/code-MIT-455a64)](LICENSE)
+[![data — CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-455a64)](LICENSE-DATA)
 
 </div>
 
@@ -115,7 +117,9 @@ cd .. && uv run --project code python Неделя_07_Базовые_модел�
 ├── Неделя_09_Аналитическая_записка/  # analytical note
 ├── Неделя_10_Отчет/                  # internship report
 │     each week: notebooks/ · tables/ · figures/ where present
-└── code/                             # xai_ews package, scripts, configs, tests
+├── code/                             # xai_ews package, scripts, configs, tests
+├── LICENSE                           # MIT, code
+└── LICENSE-DATA                      # CC BY 4.0, data, figures and documents
 ```
 
 ## Sources
@@ -131,4 +135,7 @@ Nurzhanova Z. *Research internship report: development of an explainable AI mode
 
 ## License
 
-No license has been chosen yet; all rights are reserved by the author. Fannie Mae, FHFA, BLS and Freddie Mac data keep their own terms of use; only aggregated results derived from them are stored here.
+- **Code** in `code/`, the week scripts and the code cells of the notebooks: [MIT License](LICENSE).
+- **Data, figures, documents and the report**: [Creative Commons Attribution 4.0 International](LICENSE-DATA).
+
+The result tables are derived from public Fannie Mae, FHFA, BLS, Freddie Mac and OpenFEMA data, which keep their own terms of use and are not distributed here. The license covers the author's processing, analysis and results; when using a value, cite the primary source together with this repository.

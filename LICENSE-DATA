@@ -1,0 +1,29 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 Zarina Nurzhanova
+
+The following materials in this repository are licensed under the Creative
+Commons Attribution 4.0 International License:
+
+  - Неделя_01 … Неделя_10   documents, the internship report, result tables
+                            (tables/) and figures (figures/) of every week
+  - the outputs of the notebooks (notebooks/)
+  - README.md, README_ru.md, code/README.md
+
+You are free to share and adapt these materials for any purpose, including
+commercially, provided that you give appropriate credit, provide a link to the
+license and indicate if changes were made.
+
+Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Third-party data. The result tables and figures are derived from public sources
+that keep their own terms of use: Fannie Mae Single-Family Loan Performance
+Data, the FHFA House Price Index, the Local Area Unemployment Statistics of the
+U.S. Bureau of Labor Statistics, the Freddie Mac Primary Mortgage Market Survey
+and the OpenFEMA Disaster Declarations. The primary data are not distributed in
+this repository. This license covers the author's processing, analysis and
+results, not the primary data. When using the values, cite the primary source
+together with this repository.
+
+The code in code/, the scripts in the code/ folders of the weeks and the code
+cells of the notebooks are licensed separately under the MIT License (see LICENSE).
