@@ -1,0 +1,3 @@
+task,model,features,auc_val,auc_val_with_hurricanes,seconds
+y1,candidates,21,0.8509703631487626,0.8194657279098436,342
+y1,all,59,0.8508845550851633,0.8219856744421008,444

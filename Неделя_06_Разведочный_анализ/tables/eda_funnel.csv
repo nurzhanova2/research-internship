@@ -1,0 +1,9 @@
+scope,step,rows
+all vintages,monthly records of the sampled loans (incl. inserted missing months),150033462
+all vintages,  of them inserted missing months,1402
+all vintages,quarter-end snapshots of live loans aged >= 6 months,43934120
+all vintages,panel rows (12-month outcome window inside the data),40593542
+train,panel rows on train dates (DPD 0-2 at t),1717549
+train,current at t (DPD = 0),1711583
+train,and no default before t = Y1 population,1710613
+train,with an observed label (used in this notebook),1710613

@@ -1,0 +1,25 @@
+feature,task,sample,risky,safe,rate_risky,rate_safe,sign_status
+first_time_home_buyer_indicator,y1,train,Y,N,0.002049590797230012,0.0011177682728708246,match
+first_time_home_buyer_indicator,y1,val,Y,N,0.0031018387342111936,0.0017550038345451374,match
+loan_purpose,y1,train,C,P,0.001671551885994653,0.0015216496160716357,match
+loan_purpose,y1,val,C,P,0.0024610760741032717,0.0022732563712802817,match
+channel,y1,train,B,R,0.0010932104990929328,0.0011916905910097626,mismatch
+channel,y1,val,B,R,0.001975813500156264,0.0019920591269417787,mismatch
+property_type,y1,train,MH,SF,0.0027118010099121004,0.0013408130375545668,match
+property_type,y1,val,MH,SF,0.002565375703409467,0.0021341619291240536,match
+occupancy_status,y1,train,I,P,0.0007258960858161344,0.0013017296138942722,mismatch
+occupancy_status,y1,val,I,P,0.001021388358604589,0.00213674150032356,mismatch
+mortgage_insurance_type,y1,train,1,NA,0.002273629961708793,0.0010325736754204858,match
+mortgage_insurance_type,y1,val,1,NA,0.0034375549646674186,0.0015779805721901007,match
+amortization_type,y1,train,ARM,FRM,,0.0012318649885783987,level absent
+amortization_type,y1,val,ARM,FRM,,0.0019985116319201027,level absent
+prepayment_penalty_indicator,y1,train,Y,N,,0.0012283797240429445,level absent
+prepayment_penalty_indicator,y1,val,Y,N,,0.0019985116319201027,level absent
+interest_only_loan_indicator,y1,train,Y,N,,0.0012318730822065474,level absent
+interest_only_loan_indicator,y1,val,Y,N,,0.0019985116319201027,level absent
+relocation_mortgage_indicator,y1,train,N,Y,0.0012369055981431146,0.0005688810458123389,match
+relocation_mortgage_indicator,y1,val,N,Y,0.0020081205002697596,0.0007218652999350321,match
+special_eligibility_program,y1,train,H,7,,0.0012318649885783987,level absent
+special_eligibility_program,y1,val,H,7,0.002987056090275473,0.0019746598046057225,match
+high_loan_to_value_hltv_refinance_option_indicator,y1,train,Y,N,,0.0012318649885783987,level absent
+high_loan_to_value_hltv_refinance_option_indicator,y1,val,Y,N,,0.0019985116319201027,level absent

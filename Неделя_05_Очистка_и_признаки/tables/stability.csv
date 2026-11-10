@@ -1,0 +1,60 @@
+feature,group,stability_rule,psi_val_y1,psi_max,psi_max_with_hurricanes,psi_max_sens,pass_stability_sens,pass_stability,stability_reason,sign_status,pass_sign,pass_iv,pass_iv_sens,pass_steps_2_7
+borrower_credit_score_at_origination,borrower,psi,0.03553313863162966,0.03553313863162966,0.04058200267828769,0.03569447126279573,True,True,,,True,True,True,True
+co_borrower_credit_score_at_origination,borrower,psi,0.02983397615556564,0.02983397615556564,0.03361876627319194,0.02983397615556564,True,True,,,True,True,True,True
+debt_to_income_dti,borrower,psi,0.02057770582894051,0.02057770582894051,0.022973536179014507,0.02062503445959393,True,True,,,True,True,True,True
+number_of_borrowers,borrower,psi,0.010334485049182137,0.010334485049182137,0.01161100388341316,0.010334485049182137,True,True,,,True,True,True,True
+first_time_home_buyer_indicator,borrower,psi,0.02675171717641838,0.02675171717641838,0.02819928787494668,0.02675171717641838,True,True,,,True,True,True,True
+original_interest_rate,loan,psi,0.05706461813575575,0.05706461813575575,0.05920910680556709,0.05706461813575575,True,True,,,True,True,True,True
+original_upb,exposure,psi,0.003831856366896089,0.003831856366896089,0.003162415033590882,0.003831856366896089,True,True,,,True,True,True,True
+original_loan_term,loan,psi,0.022390407265029104,0.022390407265029104,0.022480797403518115,0.022390407265029104,True,True,,,True,True,True,True
+original_loan_to_value_ratio_ltv,loan,psi,0.048578874930437055,0.048578874930437055,0.05219573318876959,0.048578874930437055,True,True,,,True,True,True,True
+original_combined_loan_to_value_ratio_cltv,loan,psi,0.04180850371112209,0.04180850371112209,0.04484429867349697,0.0418083173532143,True,True,,,True,True,True,True
+loan_purpose,loan,psi,0.059096402469651046,0.059096402469651046,0.06888204492507044,0.059096402469651046,True,True,,,True,True,True,True
+channel,loan,psi,0.016654809464251647,0.016654809464251647,0.016721100955519423,0.016654809464251647,True,True,,,True,False,False,False
+seller_name,loan,top-N,0.21738327051514875,0.24058474673350105,0.22065501467666407,0.21738327051514875,True,True,,,True,True,True,True
+property_type,loan,psi,0.0034453276558559006,0.0034453276558559006,0.00590841757796128,0.0034453276558559006,True,True,,,True,True,True,True
+number_of_units,loan,psi,0.00021155972240697219,0.00021155972240697219,5.4384875828896705e-05,0.0002197037867497162,True,True,,,True,False,False,False
+occupancy_status,loan,psi,0.0003002708051218279,0.0003002708051218279,0.00017009533191084,0.0003002708051218279,True,True,,"reviewed: investor safer than principal residence (train 0.07 % vs 0.13 %, val 0.10 % vs 0.21 %), also within LTV bands: selection by stricter post-2009 investor underwriting; flag for supervisor",True,True,True,True
+mortgage_insurance_percentage,loan,psi,0.041584941453106476,0.041584941453106476,0.043282211407624005,0.0416641923781694,True,True,,,True,True,True,True
+mortgage_insurance_type,loan,psi,0.05099280966793387,0.05099280966793387,0.050857920453922775,0.05099280966793387,True,True,,,True,True,True,True
+amortization_type,loan,psi,0.0,0.0,0.0,0.0,True,True,,,True,False,False,False
+prepayment_penalty_indicator,loan,psi,2.350235940643541e-10,2.350235940643541e-10,2.350235940643541e-10,0.0,True,True,,,True,False,False,False
+interest_only_loan_indicator,loan,psi,0.0,0.0,0.0,0.0,True,True,,,True,False,False,False
+high_balance_loan_indicator,loan,psi,0.0030998924676878497,0.0030998924676878497,0.0019632865081808466,0.0030998924676878497,True,True,,,True,False,False,False
+property_valuation_method,loan,psi,0.0,0.0,0.0,0.0,True,True,,,True,False,False,False
+relocation_mortgage_indicator,loan,psi,7.573741900230813e-07,7.573741900230813e-07,8.883302803211553e-06,7.573741900230813e-07,True,True,,,True,False,False,False
+special_eligibility_program,loan,psi,0.050562334714881106,0.050562334714881106,0.04959204023669197,0.050562334714881106,True,True,,,True,False,False,False
+high_loan_to_value_hltv_refinance_option_indicator,loan,psi,0.0,0.0,0.0,0.0,True,True,,,True,False,False,False
+property_state,geography,psi,0.010825319178229263,0.010825319178229263,0.008127234928598386,0.010825319178229263,True,True,,,True,True,True,True
+metropolitan_statistical_area_msa_or_metropolitan_statistical_division_area_msda,geography,psi,0.01955546843122565,0.01955546843122565,0.01949822900333948,0.01955546843122565,True,True,,,True,True,True,True
+zip_code_short,geography,psi,0.004889866287150505,0.004889866287150505,0.009783735518644482,0.004889866287150505,True,True,,,True,True,True,True
+servicer_name,state_at_t,top-N,0.20441149068822745,0.5411252395451704,0.2076017647520928,0.20441149068822745,False,False,PSI 0.54 > 0.25,,True,True,True,False
+current_interest_rate,state_at_t,psi,0.057065055814244876,0.057065055814244876,0.059207528969122965,0.057065055814244876,True,True,,,True,True,True,True
+age,state_at_t,psi,0.21474892673235876,0.21474892673235876,0.2006754672437508,0.21474892673235876,True,True,,"reviewed: older loans safer on train and validation (expected the opposite): the default hazard of a mortgage is hump-shaped in age (validation: rises to 26-32 months, then falls), and a loan that has stayed current for longer has proven itself; weak (IV 0.03); flag for supervisor",True,True,True,True
+remaining_months_to_maturity,state_at_t,psi,0.0858224673475641,0.0858224673475641,0.0786787995962183,0.0858316435330279,True,True,,,True,True,True,True
+remaining_months_to_legal_maturity,state_at_t,psi,0.10358723029579288,0.10358723029579288,0.09934920955509792,0.10358723029579288,True,True,,,True,True,True,True
+upb,exposure,psi,0.0033795973104897123,0.0033795973104897123,0.0032582798660571667,0.0033795973104897123,True,True,,,True,True,True,True
+upb_to_orig,exposure,psi,0.09528809996640705,0.09528809996640705,0.09086615370500015,0.09528809996640705,True,True,,,True,True,True,True
+upb_vs_schedule,behaviour,psi,0.010447882387820576,0.010447882387820576,0.011479970981800296,0.010447882387820576,True,True,,,True,True,True,True
+rate_change,behaviour,psi,0.0,0.0,0.0,0.0,True,True,,,True,False,False,False
+modified_now,behaviour,psi,0.0,0.0,0.0,0.0,True,True,,,True,False,False,False
+ever_modified,behaviour,psi,0.0,0.0,0.0,0.0,True,True,,,True,False,False,False
+n_curtail_6m,behaviour,psi,0.000894512919807005,0.000894512919807005,0.000913367358041779,0.000894512919807005,True,True,,"reviewed: Y1 non-monotone: 1-2 months of extra principal (often catch-up after a recent missed payment) are riskier, regular curtailment (4+ of 6 months) is the safest",True,True,True,True
+n_curtail_12m,behaviour,psi,0.00045573975380675875,0.00045573975380675875,0.0004780708206306958,0.00045573975380675875,True,True,,reviewed: as n_curtail_6m,True,True,True,True
+upb_chg_6m,behaviour,psi,0.10285611283923886,0.10285611283923886,0.10132506714230513,0.10285611283923886,True,True,,,True,True,True,True
+upb_chg_12m,behaviour,psi,0.08857741047828546,0.08857741047828546,0.08737703856371297,0.08857741047828546,True,True,,,True,True,True,True
+n_dpd_unknown_12m,behaviour,psi,0.0,0.0,0.0,0.0,True,True,,,True,False,False,False
+n_upb_increase_12m,behaviour,psi,9.249727166223899e-05,9.249727166223899e-05,0.00011520259979094772,9.249727166223899e-05,True,True,,,True,False,False,False
+excess_principal_12m,behaviour,psi,0.0058840080614619,0.0058840080614619,0.005751241906481277,0.0058840080614619,True,True,,reviewed: as n_curtail_6m,True,True,True,True
+mtm_ltv,macro,macro,0.017669460468468522,0.017669460468468522,0.016930357625408277,0.01768201119709753,True,True,,,True,True,True,True
+hpi_chg_since_orig,macro,macro,0.36018602610798883,0.36018602610798883,0.37024555888411065,0.360358391903539,False,False,macro: relative version hpi_chg_since_orig_rel_us preferred,,True,True,True,False
+hpi_chg_12m,macro,macro,0.4444747607596216,0.4444747607596216,0.45494417044460844,0.4447397903159926,False,False,macro: IV or direction not stable across years 2013-2017,,True,True,True,False
+unemployment,macro,macro,3.1932751483015323,3.1932751483015323,3.2447704128035877,3.1932751483015323,False,False,macro: IV or direction not stable across years 2013-2017,,True,True,True,False
+unemployment_chg_6m,macro,macro,1.6163984089899681,1.6163984089899681,1.709420731333857,1.616380042905275,False,False,macro: IV or direction not stable across years 2013-2017,,True,False,False,False
+unemployment_chg_12m,macro,macro,3.279953492049606,3.279953492049606,3.348366933532845,3.281377129227707,False,False,macro: IV or direction not stable across years 2013-2017,,True,True,True,False
+unemployment_rel_us,macro,macro,0.6537782448752085,0.6537782448752085,0.6741660880211415,0.6537782448752085,False,False,macro: IV or direction not stable across years 2013-2017,,True,True,True,False
+unemployment_chg_12m_rel_us,macro,macro,0.5213550216272339,0.5213550216272339,0.5299189815008637,0.5213601066172975,False,False,macro: IV or direction not stable across years 2013-2017,,True,True,True,False
+hpi_chg_12m_rel_us,macro,macro,0.3336441365292476,0.3336441365292476,0.3391137080167491,0.33357665785472806,True,True,,,True,True,True,True
+hpi_chg_since_orig_rel_us,macro,macro,0.054284260327307834,0.054284260327307834,0.05605063057191719,0.05441877875099177,True,True,,,True,True,True,True
+rate_spread_pmms,macro,macro,0.2923409138960168,0.2923409138960168,0.2601325661036519,0.2923409138960168,True,True,,,True,True,True,True
+sato,macro,psi,0.049673012343750225,0.049673012343750225,0.054053952414616066,0.049673012343750225,True,True,,,True,True,True,True

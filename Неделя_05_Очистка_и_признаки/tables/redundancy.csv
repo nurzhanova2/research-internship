@@ -1,0 +1,37 @@
+feature,max_corr_partner,max_abs_corr,vif_y1,mi_y1,mrmr_rank_y1,pass_redundancy,redundancy_reason,static_h3_set,prefer_note,kept_for_y1
+borrower_credit_score_at_origination,co_borrower_credit_score_at_origination,0.38913049570719,1.2957834818889846,0.0007532359547537819,1,True,,True,,True
+co_borrower_credit_score_at_origination,number_of_borrowers,0.7742937109386299,1.2607053302037237,0.000450996986355259,20,True,,True,,True
+debt_to_income_dti,borrower_credit_score_at_origination,0.21841965708246963,1.1285870604513177,0.00018608322662898023,9,True,,True,,True
+number_of_borrowers,co_borrower_credit_score_at_origination,0.7742937109386299,,0.00023738757613999588,5,False,Y1: |rho| = 0.77 with co_borrower_credit_score_at_origination,False,,False
+first_time_home_buyer_indicator,original_loan_to_value_ratio_ltv,0.303915029963355,1.250207535183259,3.214087018500404e-05,10,True,,True,,True
+original_interest_rate,current_interest_rate,0.9999911678541246,2.2074075889979214,0.00034564801310653885,34,True,,True,,True
+original_upb,upb,0.9279458626671668,1.279811649856469,6.228124818006306e-05,25,True,,True,,True
+original_loan_term,remaining_months_to_legal_maturity,0.9342746620594983,,7.908649318489477e-05,13,False,Y1: |rho| = 0.70 with upb_chg_6m,True,,False
+original_loan_to_value_ratio_ltv,original_combined_loan_to_value_ratio_cltv,0.9464737969940903,,0.00012643783918775582,32,False,Y1: |rho| = 0.89 with mtm_ltv,True,,False
+original_combined_loan_to_value_ratio_cltv,original_loan_to_value_ratio_ltv,0.9464737969940903,,0.00012463621491973952,28,False,Y1: |rho| = 0.87 with mtm_ltv,False,,False
+loan_purpose,first_time_home_buyer_indicator,0.2753074184281895,1.1840692858743076,7.499041989259166e-05,15,True,,True,,True
+seller_name,current_interest_rate,0.16881912785120246,1.056978719823198,3.655372352505461e-05,6,True,,True,,True
+property_type,hpi_chg_12m_rel_us,0.13429011560225723,1.0551952471762704,1.3968523219136959e-05,2,True,,True,,True
+occupancy_status,sato,0.31583230525443545,1.221007009302246,1.5191034338973861e-05,4,True,,True,,True
+mortgage_insurance_percentage,mortgage_insurance_type,0.9813013432905556,1.586661449398683,6.980109163228927e-05,18,True,,True,,True
+mortgage_insurance_type,mortgage_insurance_percentage,0.9813013432905556,,6.866387814106489e-05,8,False,Y1: |rho| = 0.98 with mortgage_insurance_percentage,False,,False
+property_state,metropolitan_statistical_area_msa_or_metropolitan_statistical_division_area_msda,0.6251297078023005,1.872827383138859,6.235573608544627e-05,19,True,,True,,True
+metropolitan_statistical_area_msa_or_metropolitan_statistical_division_area_msda,zip_code_short,0.6915303785740814,2.417388592381634,8.822771443522206e-05,23,True,,True,,True
+zip_code_short,metropolitan_statistical_area_msa_or_metropolitan_statistical_division_area_msda,0.6915303785740814,2.0564759616342783,0.00013009572399370276,14,True,,True,,True
+current_interest_rate,original_interest_rate,0.9999911678541246,,0.00034567091267137333,30,False,Y1: |rho| = 1.00 with original_interest_rate,False,"IV 0.554 vs 0.554 (equal); the current rate differs only after a modification, which is almost absent in train; the original rate is static (needed for the H3 static set) and simpler to explain",False
+age,upb_to_orig,0.5193753075336983,1.2175769639054193,1.696454712567636e-05,12,True,,False,,True
+remaining_months_to_maturity,remaining_months_to_legal_maturity,0.9231284465034121,,0.00011167780323429003,35,False,Y1: |rho| = 0.80 with upb_chg_6m,False,,False
+remaining_months_to_legal_maturity,original_loan_term,0.9342746620594983,,8.954164373750048e-05,36,False,Y1: |rho| = 0.72 with upb_chg_6m,False,,False
+upb,original_upb,0.9279458626671668,,3.890420392078747e-05,11,False,Y1: |rho| = 0.93 with original_upb,False,,False
+upb_to_orig,remaining_months_to_maturity,0.8896317819549318,,0.0001257113364147772,31,False,Y1: |rho| = 0.78 with upb_chg_6m,False,,False
+upb_vs_schedule,excess_principal_12m,0.5826388478835054,2.077716003667528,0.00011228689543061693,16,True,,False,,True
+n_curtail_6m,n_curtail_12m,0.9000066085520841,1.3991108141509596,0.00011022997289327535,3,True,,False,,True
+n_curtail_12m,n_curtail_6m,0.9000066085520841,,0.00010873337507941741,22,False,Y1: |rho| = 0.90 with n_curtail_6m,False,,False
+upb_chg_6m,remaining_months_to_maturity,0.8017021826165084,2.6694231856154835,0.00021513449632980014,29,True,,False,,True
+upb_chg_12m,upb_to_orig,0.7909468750480657,,0.00017115210926856326,33,False,Y1: |rho| = 0.74 with upb_chg_6m,False,,False
+excess_principal_12m,upb_vs_schedule,0.5826388478835054,1.678629252344416,9.498367581990081e-05,27,True,,False,,True
+mtm_ltv,original_loan_to_value_ratio_ltv,0.8895386150412563,2.2561203514157584,0.00018147826772551396,24,True,,False,,True
+hpi_chg_12m_rel_us,hpi_chg_since_orig_rel_us,0.757079375215342,,3.931325690031025e-05,7,False,Y1: |rho| = 0.76 with hpi_chg_since_orig_rel_us,False,,False
+hpi_chg_since_orig_rel_us,hpi_chg_12m_rel_us,0.757079375215342,1.6119068246215735,5.208928093749827e-05,26,True,,False,,True
+rate_spread_pmms,current_interest_rate,0.8907734835259731,,0.0002896334620262929,17,False,Y1: |rho| = 0.89 with original_interest_rate,False,,False
+sato,original_interest_rate,0.8524319819558969,,0.00031749697133201575,21,False,Y1: |rho| = 0.85 with original_interest_rate,False,,False

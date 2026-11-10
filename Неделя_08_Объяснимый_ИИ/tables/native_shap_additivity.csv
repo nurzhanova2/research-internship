@@ -1,0 +1,7 @@
+model (200 trees),max |sum SHAP - logit|
+"symmetric, depth 4, all 18",2.842170943040401e-14
+"Depthwise, depth 2, all 18",1.4210854715202004e-14
+"Depthwise, depth 4, all 18",2.0594460355374453
+"Depthwise, depth 4, numeric only, no missing",1.17770886548848
+"Lossguide, depth 4, numeric only, no missing",1.1846789193146492
+"M1 itself (5 x Depthwise depth 4), built-in SHAP",1.7895829178856948

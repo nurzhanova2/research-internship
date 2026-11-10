@@ -1,0 +1,30 @@
+category,rows,events,rate_pct,feature
+>=740,1318035,650,0.049315837591566235,FICO band
+680-739,314321,806,0.2564257558355948,FICO band
+<680,77276,627,0.8113774004865676,FICO band
+missing,981,6,0.6116207951070336,FICO band
+N,1501137,1684,0.11218163298886111,first_time_home_buyer_indicator
+Y,209446,405,0.19336726411581026,first_time_home_buyer_indicator
+missing,30,0,0.0,first_time_home_buyer_indicator
+R,706795,519,0.07343006105023381,loan_purpose
+P,621719,937,0.15071117337575335,loan_purpose
+C,382095,633,0.16566560672084168,loan_purpose
+U,4,0,0.0,loan_purpose
+Other,765959,1048,0.13682194477772308,seller_name
+"Wells Fargo Bank, N.A.",381752,368,0.0963976613089126,seller_name
+"Jpmorgan Chase Bank, National Association",122383,168,0.13727396778964399,seller_name
+Quicken Loans Inc.,60212,89,0.14781106756128348,seller_name
+Flagstar Capital Markets Corporation,55920,44,0.07868383404864092,seller_name
+Phh Mortgage Corporation,47711,41,0.08593406132757644,seller_name
+"Citimortgage, Inc.",45038,46,0.10213597406634398,seller_name
+Franklin American Mortgage Company,31916,65,0.2036596064669758,seller_name
+Suntrust Mortgage Inc.,27440,10,0.03644314868804665,seller_name
+Pennymac Corp.,18690,16,0.08560727661851257,seller_name
+SF,1138944,1512,0.13275455158462574,property_type
+PU,413160,389,0.09415238648465485,property_type
+CO,141755,155,0.10934358576417057,property_type
+CP,10092,3,0.029726516052318665,property_type
+MH,6662,30,0.45031522065445817,property_type
+P,1483900,1914,0.12898443291326908,occupancy_status
+I,145681,114,0.07825316959658432,occupancy_status
+S,81032,61,0.0752789021621088,occupancy_status

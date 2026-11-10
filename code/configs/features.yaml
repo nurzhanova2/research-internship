@@ -1,0 +1,250 @@
+# Stage 2: feature selection. Rules are fixed BEFORE the selection notebooks are run
+# (methodology section 5); the selected sets at the bottom are written by
+# notebooks/02_6_ablation_and_final.ipynb. Read via xai_ews.features.config.feature_config().
+
+data:
+  negatives_rate: 0.2          # all positives + negatives at r, weight 1/r
+  validation_exclude_hurricanes: true   # with them = sensitivity
+  seed: 20261024
+
+binning:                       # WoE binning, fitted on train only (weighted by 1/r)
+  prebins: 20                  # weighted quantile pre-bins (all distinct values if fewer)
+  max_bins: 10
+  min_bin_share: 0.005         # of the weighted population
+  min_bin_events: 30           # unweighted positives per bin
+  rare_bin_rate_ratio: 2.0     # a smaller bin stays separate if it has >= min_bin_events positives and an
+                               # event rate >= 2x that of its neighbours (modified loans, rare missing values, ...)
+  rare_category_share: 0.001   # categories below it are pooled into "__rare__" before grouping
+  smoothing: 0.5               # added to good / bad counts when computing WoE
+
+binning_sensitivity:           # overrides of `binning` for the comparison run (first trial of 2026-10-24):
+  min_bin_share: 0.0005        # uniformly small bins, no rare-bin rule, rare missing -> largest bin
+  rare_bin_rate_ratio: null
+
+rules:
+  univariate:
+    iv_min: 0.02               # keep if IV on train >= iv_min for at least one task (Y1 or Y2)
+    iv_leak_check: 0.5         # IV above it -> look for leakage (decision documented in the report)
+    decide_by: effect_size     # p-values (chi2, BH) are reported, not used: n ~ 10^6
+  stability:
+    psi_max: 0.25              # train -> validation PSI on the train WoE bins, non-macro groups
+    psi_groups: [borrower, loan, geography, exposure, behaviour, state_at_t]
+    macro_years: [2013, 2014, 2015, 2016, 2017]   # observation years: train 2013-15, validation 2016-17
+    macro_iv_min_year: 0.02    # macro: IV >= this in every year ...
+    macro_sign_consistent: true  # ... and the same direction in every year
+    prefer_relative_macro: true  # if raw and *_rel_us both pass, keep the relative version
+    sign_min_effect: 0.01      # |AUC - 0.5| below it: direction undefined, sign check not applied
+    high_cardinality_top_n: {servicer_name: 20, seller_name: 20}   # rest -> "other"; drop if PSI still > psi_max
+  redundancy:
+    corr_max: 0.7              # |Pearson| of WoE values on train, in either task
+    vif_max: 10                # iterative removal above it; 5-10 is reported as a warning
+    vif_warn: 5
+    sample_rows: 400000        # train subsample for correlation / VIF / mutual information
+    strength: iv_max           # of a redundant pair the feature with the larger max(IV_y1, IV_y2) stays
+  importance:
+    train_rows: 400000         # Boruta / CatBoost subsample of the r = 0.2 train (all positives kept)
+    validation_rows: 500000    # permutation importance subsample of validation
+    catboost: {iterations: 300, depth: 6, learning_rate: 0.1}
+    boruta_iterations: 20
+    boruta_alpha: 0.05
+    permutation_repeats: 3
+    drop_if: boruta_rejected_both_and_permutation_le_zero_both
+  ablation:
+    catboost: {iterations: 300, depth: 6, learning_rate: 0.1}
+    bootstrap_b: 1000          # cluster bootstrap by loan
+    non_inferiority_auc: 0.005 # upper 95 % CI of ΔAUC(all candidates - selected) < this, per task
+  other_models:                # steps 8-9 repeated with other learners (02_8): same rules, robustness only
+    logistic_woe: {C: 1.0, max_iter: 1000}   # on train WoE values (scorecard style)
+    # XGBoost / LightGBM: the Y1 settings found by the Optuna tuning of stage 3
+    # (reports/modeling/posthoc/tuning_gbdt_summary.csv); with untuned defaults both overfit the
+    # rare event (validation AUC 0.89 and 0.79 in the first Colab run)
+    xgboost: {iterations: 368, depth: 9, learning_rate: 0.0363, l2: 3.13, min_leaf: 402, subsample: 0.851}
+    lightgbm: {iterations: 335, depth: 7, num_leaves: 128, learning_rate: 0.0232, l2: 14.57, min_leaf: 1581, subsample: 0.815}
+    random_forest: {trees: 300, min_samples_leaf: 50, max_features: sqrt}
+    random_forest_train_rows: 400000   # subsample of the r = 0.2 train (all events kept), for memory
+
+# --- written by 02_6_ablation_and_final.ipynb --------------------
+selected:
+  features:
+  - borrower_credit_score_at_origination
+  - co_borrower_credit_score_at_origination
+  - debt_to_income_dti
+  - first_time_home_buyer_indicator
+  - original_interest_rate
+  - original_upb
+  - loan_purpose
+  - seller_name
+  - property_type
+  - occupancy_status
+  - mortgage_insurance_percentage
+  - age
+  - upb_vs_schedule
+  - n_curtail_6m
+  - upb_chg_6m
+  - excess_principal_12m
+  - mtm_ltv
+  - hpi_chg_since_orig_rel_us
+  n_features: 18
+  by_group:
+    behaviour:
+    - upb_vs_schedule
+    - n_curtail_6m
+    - upb_chg_6m
+    - excess_principal_12m
+    borrower:
+    - borrower_credit_score_at_origination
+    - co_borrower_credit_score_at_origination
+    - debt_to_income_dti
+    - first_time_home_buyer_indicator
+    exposure:
+    - original_upb
+    loan:
+    - original_interest_rate
+    - loan_purpose
+    - seller_name
+    - property_type
+    - occupancy_status
+    - mortgage_insurance_percentage
+    macro:
+    - mtm_ltv
+    - hpi_chg_since_orig_rel_us
+    state_at_t:
+    - age
+  categorical:
+  - first_time_home_buyer_indicator
+  - loan_purpose
+  - seller_name
+  - property_type
+  - occupancy_status
+  categorical_h3:
+  - first_time_home_buyer_indicator
+  - loan_purpose
+  - seller_name
+  - property_type
+  - occupancy_status
+  - property_state
+  - metropolitan_statistical_area_msa_or_metropolitan_statistical_division_area_msda
+  - zip_code_short
+  static_h3:
+  - borrower_credit_score_at_origination
+  - co_borrower_credit_score_at_origination
+  - debt_to_income_dti
+  - first_time_home_buyer_indicator
+  - original_interest_rate
+  - original_upb
+  - original_loan_term
+  - original_loan_to_value_ratio_ltv
+  - loan_purpose
+  - seller_name
+  - property_type
+  - occupancy_status
+  - mortgage_insurance_percentage
+  - property_state
+  - metropolitan_statistical_area_msa_or_metropolitan_statistical_division_area_msda
+  - zip_code_short
+  h3_full:
+  - borrower_credit_score_at_origination
+  - co_borrower_credit_score_at_origination
+  - debt_to_income_dti
+  - first_time_home_buyer_indicator
+  - original_interest_rate
+  - original_upb
+  - original_loan_term
+  - original_loan_to_value_ratio_ltv
+  - loan_purpose
+  - seller_name
+  - property_type
+  - occupancy_status
+  - mortgage_insurance_percentage
+  - property_state
+  - metropolitan_statistical_area_msa_or_metropolitan_statistical_division_area_msda
+  - zip_code_short
+  - age
+  - upb_vs_schedule
+  - n_curtail_6m
+  - upb_chg_6m
+  - excess_principal_12m
+  - mtm_ltv
+  - hpi_chg_since_orig_rel_us
+  category_handling:
+    seller_name:
+      rule: top-20 train categories + other
+      categories:
+      - Other
+      - Wells Fargo Bank, N.A.
+      - Jpmorgan Chase Bank, National Association
+      - Quicken Loans Inc.
+      - Flagstar Capital Markets Corporation
+      - Phh Mortgage Corporation
+      - Citimortgage, Inc.
+      - Franklin American Mortgage Company
+      - Suntrust Mortgage Inc.
+      - Pennymac Corp.
+      - Nycb Mortgage Company, Llc
+      - Ally Bank
+      - Federal Home Loan Bank Of Chicago
+      - Stearns Lending, Llc
+      - Gmac Mortgage, Llc
+      - Flagstar Bank, Fsb
+      - Ditech Financial Llc
+      - Chicago Mortgage Solutions Dba Interfirst Mortgage Company
+      - Freedom Mortgage Corp.
+      - Nationstar Mortgage, Llc
+    servicer_name: 'excluded: PSI 0.54 > 0.25'
+    property_state, msa: not in the main set; in static_h3 and h3_full as categorical
+    other_categoricals: as is; CatBoost ordered target statistics, embeddings in the networks
+    missing: 'categorical: own level ''NA''; numeric: NaN (WoE: own bin)'
+  tasks:
+  - y1
+  validation_auc:
+    y1:
+      selected: 0.8538269236215623
+      after_step8: 0.8509703631487626
+      all: 0.8508845550851633
+      h3_static: 0.8361682412997883
+      h3_full: 0.8495321990043772
+excluded:
+  number_of_borrowers: 'step 4-5 redundancy: Y1: |rho| = 0.77 with co_borrower_credit_score_at_origination'
+  original_loan_term: 'step 4-5 redundancy: Y1: |rho| = 0.70 with upb_chg_6m'
+  original_loan_to_value_ratio_ltv: 'step 4-5 redundancy: Y1: |rho| = 0.89 with mtm_ltv'
+  original_combined_loan_to_value_ratio_cltv: 'step 4-5 redundancy: Y1: |rho| = 0.87 with mtm_ltv'
+  channel: 'step 2 univariate: IV < 0.02 (Y1 0.005)'
+  number_of_units: 'step 2 univariate: IV < 0.02 (Y1 0.001)'
+  mortgage_insurance_type: 'step 4-5 redundancy: Y1: |rho| = 0.98 with mortgage_insurance_percentage'
+  amortization_type: 'step 2 univariate: IV < 0.02 (Y1 0.000)'
+  prepayment_penalty_indicator: 'step 2 univariate: IV < 0.02 (Y1 0.016)'
+  interest_only_loan_indicator: 'step 2 univariate: IV < 0.02 (Y1 0.000)'
+  high_balance_loan_indicator: 'step 2 univariate: IV < 0.02 (Y1 0.009)'
+  property_valuation_method: 'step 2 univariate: IV < 0.02 (Y1 0.000)'
+  relocation_mortgage_indicator: 'step 2 univariate: IV < 0.02 (Y1 0.003)'
+  special_eligibility_program: 'step 2 univariate: IV < 0.02 (Y1 0.000)'
+  high_loan_to_value_hltv_refinance_option_indicator: 'step 2 univariate: IV < 0.02 (Y1 0.000)'
+  property_state: 'step 9 ablation: without group geography: validation Y1 ΔAUC +0.0036 [0.0015; 0.0055],
+    DeLong p = 0.000'
+  metropolitan_statistical_area_msa_or_metropolitan_statistical_division_area_msda: 'step 9 ablation:
+    without group geography: validation Y1 ΔAUC +0.0036 [0.0015; 0.0055], DeLong p = 0.000'
+  zip_code_short: 'step 9 ablation: without group geography: validation Y1 ΔAUC +0.0036 [0.0015; 0.0055],
+    DeLong p = 0.000'
+  servicer_name: 'step 6 stability: PSI 0.54 > 0.25'
+  current_interest_rate: 'step 4-5 redundancy: Y1: |rho| = 1.00 with original_interest_rate'
+  remaining_months_to_maturity: 'step 4-5 redundancy: Y1: |rho| = 0.80 with upb_chg_6m'
+  remaining_months_to_legal_maturity: 'step 4-5 redundancy: Y1: |rho| = 0.72 with upb_chg_6m'
+  upb: 'step 4-5 redundancy: Y1: |rho| = 0.93 with original_upb'
+  upb_to_orig: 'step 4-5 redundancy: Y1: |rho| = 0.78 with upb_chg_6m'
+  rate_change: 'step 2 univariate: IV < 0.02 (Y1 0.000)'
+  modified_now: 'step 2 univariate: IV < 0.02 (Y1 0.000)'
+  ever_modified: 'step 2 univariate: IV < 0.02 (Y1 0.000)'
+  n_curtail_12m: 'step 4-5 redundancy: Y1: |rho| = 0.90 with n_curtail_6m'
+  upb_chg_12m: 'step 4-5 redundancy: Y1: |rho| = 0.74 with upb_chg_6m'
+  n_dpd_unknown_12m: 'step 2 univariate: IV < 0.02 (Y1 0.000)'
+  n_upb_increase_12m: 'step 2 univariate: IV < 0.02 (Y1 0.007)'
+  hpi_chg_since_orig: 'step 6 stability: macro: relative version hpi_chg_since_orig_rel_us preferred'
+  hpi_chg_12m: 'step 6 stability: macro: IV or direction not stable across years 2013-2017'
+  unemployment: 'step 6 stability: macro: IV or direction not stable across years 2013-2017'
+  unemployment_chg_6m: 'step 2 univariate: IV < 0.02 (Y1 0.012)'
+  unemployment_chg_12m: 'step 6 stability: macro: IV or direction not stable across years 2013-2017'
+  unemployment_rel_us: 'step 6 stability: macro: IV or direction not stable across years 2013-2017'
+  unemployment_chg_12m_rel_us: 'step 6 stability: macro: IV or direction not stable across years 2013-2017'
+  hpi_chg_12m_rel_us: 'step 4-5 redundancy: Y1: |rho| = 0.76 with hpi_chg_since_orig_rel_us'
+  rate_spread_pmms: 'step 4-5 redundancy: Y1: |rho| = 0.89 with original_interest_rate'
+  sato: 'step 4-5 redundancy: Y1: |rho| = 0.85 with original_interest_rate'

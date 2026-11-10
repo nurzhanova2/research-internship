@@ -1,0 +1,115 @@
+{
+  "y1": {
+    "train_rows": 2294292,
+    "train_events": 14062,
+    "negatives_rate": 0.2,
+    "validation_rows": 2010979,
+    "validation_events": 6472,
+    "validation_auc": 0.8195,
+    "stop": false,
+    "top_importance": [
+      [
+        "borrower_credit_score_at_origination",
+        24.92
+      ],
+      [
+        "co_borrower_credit_score_at_origination",
+        14.61
+      ],
+      [
+        "n_curtail_12m",
+        7.18
+      ],
+      [
+        "number_of_borrowers",
+        6.36
+      ],
+      [
+        "debt_to_income_dti",
+        6.22
+      ],
+      [
+        "n_curtail_6m",
+        3.79
+      ],
+      [
+        "original_interest_rate",
+        2.91
+      ],
+      [
+        "upb_vs_schedule",
+        2.2
+      ],
+      [
+        "upb_chg_6m",
+        2.18
+      ],
+      [
+        "excess_principal_12m",
+        2.11
+      ],
+      [
+        "original_upb",
+        1.73
+      ],
+      [
+        "sato",
+        1.71
+      ],
+      [
+        "loan_purpose",
+        1.7
+      ],
+      [
+        "occupancy_status",
+        1.58
+      ],
+      [
+        "zip_code_short",
+        1.51
+      ]
+    ],
+    "top_single_feature_auc": [
+      [
+        "borrower_credit_score_at_origination",
+        0.7738
+      ],
+      [
+        "sato",
+        0.681
+      ],
+      [
+        "current_interest_rate",
+        0.6749
+      ],
+      [
+        "original_interest_rate",
+        0.6749
+      ],
+      [
+        "upb_chg_6m",
+        0.6499
+      ],
+      [
+        "upb_chg_12m",
+        0.6387
+      ],
+      [
+        "mtm_ltv",
+        0.6334
+      ],
+      [
+        "debt_to_income_dti",
+        0.6312
+      ],
+      [
+        "original_loan_to_value_ratio_ltv",
+        0.6117
+      ],
+      [
+        "original_combined_loan_to_value_ratio_cltv",
+        0.6115
+      ]
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+case,group,pd_pct,event,reason_1,reason_2,reason_3,mitigating
+0,caught,1.5546089211893943,1,FICO = 655 (+1.85),FICO co-borrower = 659 (+0.45),DTI = 44 (+0.44),mtm_ltv = 40.85 (-0.24)
+1,caught,5.0634228407110635,1,FICO = 624 (+1.77),FICO co-borrower = missing (+0.59),original UPB = 3.9e+04 (+0.39),loan purpose = P (-0.05)
+2,caught,2.318838032885341,1,FICO = 621 (+1.99),FICO co-borrower = 659 (+0.40),upb_vs_schedule = 0.0009462 (+0.35),excess principal 12m = 1.088e-07 (-0.35)
+3,false alarm,1.2889287299251035,0,FICO = 644 (+1.70),interest rate = 5.125 (+0.57),DTI = 44 (+0.35),HPI change rel. US = 0.05796 (-0.14)
+4,false alarm,1.0742192560682648,0,FICO = 693 (+0.92),FICO co-borrower = missing (+0.63),interest rate = 4.625 (+0.30),excess principal 12m = 0.0007389 (-0.16)
+5,false alarm,1.0143879492532406,0,FICO co-borrower = missing (+0.62),DTI = 44 (+0.48),FICO = 734 (+0.43),original UPB = 1.9e+05 (-0.11)
+6,missed,0.6433871816264621,1,FICO = 685 (+1.18),DTI = 44 (+0.49),mtm_ltv = 88.9 (+0.38),FICO co-borrower = 748 (-0.56)
+7,missed,0.6258131292790196,1,FICO = 714 (+0.69),FICO co-borrower = 645 (+0.48),interest rate = 4.875 (+0.40),excess principal 12m = 5.348e-08 (-0.31)
+8,missed,0.6953233635119236,1,FICO = 659 (+1.79),FICO co-borrower = 634 (+0.49),DTI = 45 (+0.42),excess principal 12m = 9.897e-09 (-0.38)
+9,quiet,0.01201551017852714,0,FICO co-borrower = missing (+0.60),excess principal 12m = 0.1294 (+0.23),age = 27 (+0.05),FICO = 788 (-0.54)

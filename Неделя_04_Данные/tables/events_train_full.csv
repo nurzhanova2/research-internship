@@ -1,0 +1,2 @@
+split_main,n_obs,n_loans,y1_events,y1_event_loans,y1_rate,n_obs_y2_pop,y2_events,y2_event_loans,y2_rate,y2_strict_events,y2_strict_event_loans,prepaid_in_window_share,forbearance_share,assistance_12m_share,upb_masked_share,upb_total
+train,11405213,2033347,14062,7068,0.0012329449699887236,11234623,21122,10035,0.001880080889229661,15104,8728,0.09358045307878073,,0.0,0.010776738672044091,2285442852311.873

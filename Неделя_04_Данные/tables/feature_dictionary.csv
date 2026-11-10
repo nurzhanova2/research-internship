@@ -1,0 +1,60 @@
+feature,meaning_en,meaning_ru,group,static,kind,kind_ru,unit_en,unit_ru,values,model_input,source
+borrower_credit_score_at_origination,FICO score of the borrower at origination,кредитный рейтинг (FICO) заёмщика при выдаче,borrower,True,integer,целое,points,баллы,300-850,number,Fannie Mae
+co_borrower_credit_score_at_origination,FICO score of the co-borrower (empty if none),"рейтинг созаёмщика (пусто, если его нет)",borrower,True,integer,целое,points,баллы,300-850; empty = no co-borrower,number,Fannie Mae
+debt_to_income_dti,"monthly debt payments / income at origination, %","долговая нагрузка: платежи по долгам / доход, %",borrower,True,integer,целое,% of monthly income,% месячного дохода,,number,Fannie Mae
+number_of_borrowers,number of borrowers on the loan,число заёмщиков по кредиту,borrower,True,integer,целое,persons,человек,,number,Fannie Mae
+first_time_home_buyer_indicator,first-time home buyer (Y/N),покупает жильё впервые (Y/N),borrower,True,binary,бинарный,code,код,"Y yes, N no, empty = unknown",category,Fannie Mae
+original_interest_rate,"note rate at origination, %","ставка по кредиту при выдаче, %",loan,True,continuous,вещественное,% per year,% годовых,,number,Fannie Mae
+original_upb,loan amount at origination,сумма кредита при выдаче,exposure,True,continuous,вещественное,US dollars,долл. США,,number,Fannie Mae
+original_loan_term,"contractual term, months","срок кредита по договору, мес.",loan,True,integer,целое,months,мес.,,number,Fannie Mae
+original_loan_to_value_ratio_ltv,"loan / property value at origination, %","кредит / стоимость жилья при выдаче (LTV), %",loan,True,integer,целое,% of property value,% стоимости жилья,,number,Fannie Mae
+original_combined_loan_to_value_ratio_cltv,"all liens / property value, %","все кредиты под этот залог / стоимость жилья (CLTV), %",loan,True,integer,целое,% of property value,% стоимости жилья,all liens,number,Fannie Mae
+loan_purpose,"purpose: P purchase, R rate-term refi, C cash-out refi","цель: P покупка, R рефинансирование, C рефинансирование с выдачей наличных",loan,True,categorical,категориальный,code,код,"P purchase, R refinance, C cash-out refinance, U refinance not specified",category,Fannie Mae
+channel,"origination channel: R retail, B broker, C correspondent","канал выдачи: R розница, B брокер, C корреспондент",loan,True,categorical,категориальный,code,код,"R retail, B broker, C correspondent",category,Fannie Mae
+seller_name,institution that sold the loan to Fannie Mae,продавец кредита в Fannie Mae,loan,True,categorical,категориальный,name,название,top 20 sellers + Other,category,Fannie Mae
+property_type,"SF single-family, PU planned unit, CO condo, CP co-op, MH manufactured","тип объекта: SF дом, PU таунхаус в посёлке, CO кондоминиум, CP кооператив, MH сборный дом",loan,True,categorical,категориальный,code,код,"SF single-family, PU planned unit, CO condo, CP co-op, MH manufactured",category,Fannie Mae
+number_of_units,number of dwelling units (1-4),число квартир в объекте (1–4),loan,True,integer,целое,dwelling units,квартир,1-4,number,Fannie Mae
+occupancy_status,"P principal residence, S second home, I investor","P основное жильё, S второе жильё, I инвестиционное",loan,True,categorical,категориальный,code,код,"P principal residence, S second home, I investor",category,Fannie Mae
+mortgage_insurance_percentage,"mortgage insurance coverage, %","покрытие ипотечного страхования, %",loan,True,continuous,вещественное,% of loan covered,% долга под страховкой,empty = no MI,number,Fannie Mae
+mortgage_insurance_type,"1 borrower-paid, 2 lender-paid, empty = no insurance","1 платит заёмщик, 2 платит кредитор, пусто — страховки нет",loan,True,categorical,категориальный,code,код,"1 borrower-paid, 2 lender-paid, 3 enterprise-paid, empty = no MI",category,Fannie Mae
+amortization_type,FRM fixed rate / ARM adjustable,FRM фиксированная / ARM плавающая ставка,loan,True,categorical,категориальный,code,код,FRM fixed rate (only value in the data),category,Fannie Mae
+prepayment_penalty_indicator,prepayment penalty (Y/N),штраф за досрочное погашение (Y/N),loan,True,binary,бинарный,code,код,"Y yes, N no",category,Fannie Mae
+interest_only_loan_indicator,interest-only period (Y/N),период выплаты только процентов (Y/N),loan,True,binary,бинарный,code,код,"Y yes, N no",category,Fannie Mae
+high_balance_loan_indicator,loan above the standard conforming limit (Y/N),кредит выше стандартного лимита (Y/N),loan,True,binary,бинарный,code,код,"Y yes, N no",category,Fannie Mae
+property_valuation_method,"A appraisal, W waiver, ...","способ оценки: A оценщик, W без оценки, …",loan,True,categorical,категориальный,code,код,"A appraisal, W waiver, C/P waiver + data collection, R targeted refi; empty in early vintages",category,Fannie Mae
+relocation_mortgage_indicator,relocation mortgage (employer-assisted move),ипотека при переезде по работе,loan,True,binary,бинарный,code,код,"Y yes, N no",category,Fannie Mae
+special_eligibility_program,"affordable programs: H HomeReady, F HFA, 7 none","льготные программы: H HomeReady, F HFA, 7 нет",loan,True,categorical,категориальный,code,код,"H HomeReady, F HFA Preferred, R RefiNow, 7 none",category,Fannie Mae
+high_loan_to_value_hltv_refinance_option_indicator,high-LTV refinance option (Y/N),рефинансирование при высоком LTV (Y/N),loan,True,binary,бинарный,code,код,"Y yes, N no",category,Fannie Mae
+property_state,state of the property,штат объекта,geography,True,categorical,категориальный,code,код,"2-letter code: 50 states, DC, PR, VI, GU",category,Fannie Mae
+metropolitan_statistical_area_msa_or_metropolitan_statistical_division_area_msda,metropolitan area code (00000 = outside),код агломерации (00000 — вне агломерации),geography,True,categorical,категориальный,code,код,"5-digit MSA code, 00000 = outside a metro area",category,Fannie Mae
+zip_code_short,first 3 digits of the ZIP code,первые 3 цифры почтового индекса,geography,True,categorical,категориальный,code,код,first 3 digits of the ZIP code (ZIP3),category,Fannie Mae
+servicer_name,current servicer,текущий сервисер (обслуживающая организация),state_at_t,False,categorical,категориальный,name,название,top 20 servicers + Other,category,Fannie Mae
+current_interest_rate,note rate at t,ставка на дату t,state_at_t,False,continuous,вещественное,% per year,% годовых,,number,Fannie Mae
+age,"loan age at t, months","возраст кредита на t, мес.",state_at_t,False,integer,целое,months,мес.,>= 6 in the panel,number,Fannie Mae
+remaining_months_to_maturity,months left to maturity at t,"остаток срока на t, мес.",state_at_t,False,integer,целое,months,мес.,,number,Fannie Mae
+remaining_months_to_legal_maturity,months left to the legal maturity date,"остаток срока до юридической даты погашения, мес.",state_at_t,False,integer,целое,months,мес.,,number,Fannie Mae
+upb,outstanding balance (ОД) at t,остаток долга (ОД) на t,exposure,False,continuous,вещественное,US dollars,долл. США,outstanding balance at t,number,Fannie Mae
+upb_to_orig,UPB at t / original UPB,ОД на t / ОД при выдаче,exposure,False,continuous,вещественное,share of original amount,доля исходной суммы,0-1,number,computed from Fannie Mae
+upb_vs_schedule,UPB / scheduled UPB - 1 (< 0: paying ahead),ОД / плановый ОД − 1 (< 0 — платит быстрее графика),behaviour,False,continuous,вещественное,share (0.05 = 5 % above schedule),"доля (0,05 = на 5 % выше графика)",< 0 paying ahead,number,computed from Fannie Mae
+rate_change,current - original rate (cut = modification),текущая ставка − ставка при выдаче (снижение = модификация),behaviour,False,continuous,вещественное,percentage points,п.п.,< 0 rate cut (modification),number,computed from Fannie Mae
+modified_now,modification flag at t,флаг модификации на t,behaviour,False,binary,бинарный,flag,флаг,0/1,number,computed from Fannie Mae
+ever_modified,ever modified up to t,модифицировался когда-либо до t,behaviour,False,binary,бинарный,flag,флаг,0/1,number,computed from Fannie Mae
+n_curtail_6m,months with a partial prepayment in 6 months,число месяцев с частичным досрочным погашением за 6 мес.,behaviour,False,integer,целое,months,мес.,0-6,number,computed from Fannie Mae
+n_curtail_12m,months with a partial prepayment in 12 months,число месяцев с частичным досрочным погашением за 12 мес.,behaviour,False,integer,целое,months,мес.,0-12,number,computed from Fannie Mae
+upb_chg_6m,UPB_t / UPB_(t-6) - 1 (usually < 0),ОД_t / ОД_(t−6) − 1 (обычно < 0),behaviour,False,continuous,вещественное,share (-0.02 = balance fell 2 %),"доля (−0,02 = долг снизился на 2 %)",usually < 0,number,computed from Fannie Mae
+upb_chg_12m,UPB_t / UPB_(t-12) - 1,ОД_t / ОД_(t−12) − 1,behaviour,False,continuous,вещественное,share (-0.02 = balance fell 2 %),"доля (−0,02 = долг снизился на 2 %)",usually < 0,number,computed from Fannie Mae
+n_dpd_unknown_12m,months with unknown status (XX) in 12 months,число месяцев с неизвестным статусом (XX) за 12 мес.,behaviour,False,integer,целое,months,мес.,0-12,number,computed from Fannie Mae
+n_upb_increase_12m,months with a UPB increase in 12 months,число месяцев с ростом ОД за 12 мес.,behaviour,False,integer,целое,months,мес.,0-12,number,computed from Fannie Mae
+excess_principal_12m,principal paid above schedule over 12 months / original UPB,сверхплановое погашение за 12 мес. / ОД при выдаче,behaviour,False,continuous,вещественное,share of original amount,доля исходной суммы,>= 0,number,computed from Fannie Mae
+mtm_ltv,mark-to-market LTV: UPB / (value indexed by FHFA HPI),"текущий LTV: ОД / стоимость жилья, пересчитанная по индексу цен FHFA",macro,False,continuous,вещественное,% of current property value,% текущей стоимости жилья,,number,FHFA HPI + Fannie Mae
+hpi_chg_since_orig,local house-price change since origination,изменение цен на жильё с даты выдачи,macro,False,continuous,вещественное,share (0.10 = +10 %),"доля (0,10 = +10 %)",,number,FHFA HPI + Fannie Mae
+hpi_chg_12m,local house-price change over 12 months,изменение цен на жильё за 12 мес.,macro,False,continuous,вещественное,share (0.10 = +10 %),"доля (0,10 = +10 %)",,number,FHFA HPI + Fannie Mae
+unemployment,state unemployment rate,безработица в штате,macro,False,continuous,вещественное,% of labour force,% рабочей силы,,number,BLS LAUS + Fannie Mae
+unemployment_chg_6m,change of state unemployment over 6 months,изменение безработицы за 6 мес.,macro,False,continuous,вещественное,percentage points,п.п.,,number,BLS LAUS + Fannie Mae
+unemployment_chg_12m,change of state unemployment over 12 months,изменение безработицы за 12 мес.,macro,False,continuous,вещественное,percentage points,п.п.,,number,BLS LAUS + Fannie Mae
+unemployment_rel_us,state - US unemployment (relative),безработица штата минус США (относительная),macro,False,continuous,вещественное,percentage points,п.п.,state minus US,number,BLS LAUS + Fannie Mae
+unemployment_chg_12m_rel_us,state - US 12-month change of unemployment,изменение безработицы штата минус изменение по США,macro,False,continuous,вещественное,percentage points,п.п.,state minus US,number,BLS LAUS + Fannie Mae
+hpi_chg_12m_rel_us,local - US 12-month house-price change,изменение цен локально минус по США,macro,False,continuous,вещественное,share points (0.02 = 2 p.p. faster than US),"доли (0,02 = на 2 п.п. быстрее США)",local minus US,number,FHFA HPI + Fannie Mae
+hpi_chg_since_orig_rel_us,local - US house-price change since origination,изменение цен с выдачи локально минус по США,macro,False,continuous,вещественное,share points (0.02 = 2 p.p. faster than US),"доли (0,02 = на 2 п.п. быстрее США)",local minus US,number,FHFA HPI + Fannie Mae
+rate_spread_pmms,current rate - market 30y rate (PMMS) at t,текущая ставка − рыночная (PMMS) на t,macro,False,continuous,вещественное,percentage points,п.п.,loan rate minus market rate,number,Freddie Mac PMMS + Fannie Mae
+sato,spread at origination: rate - PMMS at origination,спред при выдаче: ставка − PMMS на дату выдачи,macro,True,continuous,вещественное,percentage points,п.п.,loan rate minus market rate at origination,number,Freddie Mac PMMS + Fannie Mae

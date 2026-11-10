@@ -1,0 +1,16 @@
+feature,iv_min_period,iv_max_period,sign_consistent,strength_ok,stable,task,variant,passes_iv
+unemployment,0.013344072854303956,0.05952532989921912,False,False,False,y1,main,True
+unemployment,0.013344072854303956,0.8346278662771089,False,False,False,y1,with hurricane rows,True
+unemployment,0.006441300069358164,0.05673322668223271,False,False,False,y1,without PR,True
+unemployment_chg_12m,0.005285059147320675,0.06292402739255429,False,False,False,y1,main,True
+unemployment_chg_12m,0.01896442903192891,0.17921698782012244,True,False,False,y1,with hurricane rows,True
+unemployment_chg_12m,0.0054323902219191485,0.05844182463361649,False,False,False,y1,without PR,True
+unemployment_chg_12m_rel_us,0.011883559126808559,0.06104158308667392,False,False,False,y1,main,True
+unemployment_chg_12m_rel_us,0.01256647043624257,0.285132637976943,True,False,False,y1,with hurricane rows,True
+unemployment_chg_12m_rel_us,0.011517644960486503,0.06287835658064202,False,False,False,y1,without PR,True
+unemployment_chg_6m,0.011178266493721532,0.03169054074504761,False,False,False,y1,main,False
+unemployment_chg_6m,0.011240567893858657,0.5540929926699634,True,False,False,y1,with hurricane rows,False
+unemployment_chg_6m,0.01063341049746646,0.030968239990768476,False,False,False,y1,without PR,False
+unemployment_rel_us,0.009281169228569003,0.06906305676262571,False,False,False,y1,main,True
+unemployment_rel_us,0.009281169228569003,0.597381648634447,False,False,False,y1,with hurricane rows,True
+unemployment_rel_us,0.00588044147699397,0.07535340799418086,False,False,False,y1,without PR,True

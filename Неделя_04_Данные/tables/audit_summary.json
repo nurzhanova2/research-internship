@@ -1,0 +1,214 @@
+{
+  "validation_hurricanes_2017": [
+    {
+      "validation_set": "all",
+      "n_obs": 2010979,
+      "y1_events": 6472,
+      "y1_event_loans": 3818,
+      "y1_rate": 0.0032183329612094406,
+      "y2_events": 8967,
+      "y2_event_loans": 4936,
+      "y2_rate": 0.004557627533010652
+    },
+    {
+      "validation_set": "without_hurricane_rows",
+      "n_obs": 1854380,
+      "y1_events": 3706,
+      "y1_event_loans": 2259,
+      "y1_rate": 0.0019985116319201027,
+      "y2_events": 5263,
+      "y2_event_loans": 3000,
+      "y2_rate": 0.002900248639974607
+    }
+  ],
+  "train": {
+    "n_obs": 1710613,
+    "n_loans": 304852,
+    "y1_events": 2089,
+    "y1_event_loans": 1037,
+    "y1_rate": 0.0012211996518207216,
+    "n_obs_y2_pop": 1685094,
+    "y2_events": 3168,
+    "y2_event_loans": 1496,
+    "y2_rate": 0.0018800138152530363,
+    "y2_strict_events": 2262,
+    "y2_strict_event_loans": 1309,
+    "prepaid_in_window_share": 0.09307832923051561
+  },
+  "y2_train_events_vs_trigger_15pct": {
+    "events": 3168,
+    "event_loans": 1496,
+    "trigger": 5000,
+    "fallback_needed": true
+  },
+  "splits": [
+    {
+      "split_main": null,
+      "n_obs": 31176160,
+      "y1_events": 296295,
+      "y2_events": 361580,
+      "y1_rate": 0.009503896567120518,
+      "y2_rate": 0.011961651259675216
+    },
+    {
+      "split_main": "test",
+      "n_obs": 4111592,
+      "y1_events": 8661,
+      "y2_events": 12658,
+      "y1_rate": 0.0021064833281123226,
+      "y2_rate": 0.003156881655345238
+    },
+    {
+      "split_main": "train",
+      "n_obs": 1710613,
+      "y1_events": 2089,
+      "y2_events": 3168,
+      "y1_rate": 0.0012211996518207216,
+      "y2_rate": 0.0018800138152530363
+    },
+    {
+      "split_main": "validation",
+      "n_obs": 2010979,
+      "y1_events": 6472,
+      "y2_events": 8967,
+      "y1_rate": 0.0032183329612094406,
+      "y2_rate": 0.004557627533010652
+    }
+  ],
+  "lgd_train_period": {
+    "liquidations": 370,
+    "with_loss_data": 370,
+    "segments": 8,
+    "segments_below_n_min": 8,
+    "n_min": 200
+  },
+  "lgd_base_all_vintages": {
+    "definition": "gross of MI, discounted at note rate, segment by MTM LTV at default",
+    "liquidations": 68216,
+    "segments": 12,
+    "segments_below_n_min": 0,
+    "constant_mean": 0.4780441906600122,
+    "constant_median": 0.4805185213822358,
+    "constant_after_mi_mean": 0.4117229682844467,
+    "constant_after_mi_median": 0.41018313751446756,
+    "constant_undiscounted_mean": 0.429839435872726,
+    "constant_undiscounted_median": 0.421360399393494
+  },
+  "truncated_histories": [
+    {
+      "truncated": false,
+      "loans": 2680710,
+      "mean_months_observed": 55.96728478649313,
+      "share_30p_at_last_record": 0.017170451111832314,
+      "share_ever_30p": 0.13858231587900222,
+      "share_ever_60p": 0.06256961775052132,
+      "share_ever_90p": 0.049012388509014404,
+      "share_of_loans": 1.0
+    }
+  ],
+  "y2_threshold_unique_loans_train_full": {
+    "y1_events": 14062,
+    "y1_event_loans": 7068,
+    "y2_events": 21122,
+    "y2_event_loans": 10035,
+    "y2_strict_event_loans": 8728,
+    "trigger": 5000,
+    "y2_below_trigger": false
+  },
+  "train_full": {
+    "n_obs": 11405213,
+    "n_loans": 2033347,
+    "y1_events": 14062,
+    "y1_event_loans": 7068,
+    "y2_events": 21122,
+    "y2_event_loans": 10035,
+    "y2_strict_events": 15104,
+    "subsamples": [
+      {
+        "r": 0.2,
+        "label": "y1",
+        "rows": 2294292,
+        "events": 14062
+      },
+      {
+        "r": 0.2,
+        "label": "y2",
+        "rows": 2266201,
+        "events": 21194
+      },
+      {
+        "r": 0.1,
+        "label": "y1",
+        "rows": 1155111,
+        "events": 14062
+      },
+      {
+        "r": 0.1,
+        "label": "y2",
+        "rows": 1144753,
+        "events": 21194
+      },
+      {
+        "r": 0.5,
+        "label": "y1",
+        "rows": 5708133,
+        "events": 14062
+      },
+      {
+        "r": 0.5,
+        "label": "y2",
+        "rows": 5626983,
+        "events": 21194
+      }
+    ]
+  },
+  "psi_validation_over_0.25": [
+    {
+      "feature": "unemployment",
+      "train->validation": 3.2625324661212955
+    },
+    {
+      "feature": "unemployment_chg_12m",
+      "train->validation": 3.1525381267467276
+    },
+    {
+      "feature": "unemployment_chg_6m",
+      "train->validation": 1.6160494788546913
+    },
+    {
+      "feature": "servicer_name",
+      "train->validation": 0.8086339927247188
+    },
+    {
+      "feature": "unemployment_rel_us",
+      "train->validation": 0.563564850191733
+    },
+    {
+      "feature": "hpi_chg_12m",
+      "train->validation": 0.4137509818718046
+    },
+    {
+      "feature": "unemployment_chg_12m_rel_us",
+      "train->validation": 0.411341992211741
+    },
+    {
+      "feature": "hpi_chg_since_orig",
+      "train->validation": 0.3671230673656586
+    },
+    {
+      "feature": "seller_name",
+      "train->validation": 0.32265164816479897
+    }
+  ],
+  "psi_validation_0.1_0.25": [
+    "rate_spread_pmms",
+    "hpi_chg_12m_rel_us",
+    "age",
+    "remaining_months_to_maturity",
+    "upb_chg_12m",
+    "upb_to_orig",
+    "remaining_months_to_legal_maturity"
+  ],
+  "panel_bytes": 3061514231,
+  "panel_rows": 39009344
+}

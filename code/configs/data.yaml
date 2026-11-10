@@ -1,0 +1,120 @@
+# Data design for stage 1. v0.2 — agreed with the supervisor on 2026-10-23, see docs/proposal/ru/05_methodology.md and 08_open_questions.md.
+
+raw:
+  delimiter: "|"
+  n_fields: 113
+  data_end: "2026-03"
+  vintages: [2006Q1, 2006Q3, 2008Q1, 2008Q3, 2012Q1, 2012Q3,
+             2014Q1, 2014Q2, 2014Q3, 2014Q4, 2015Q1, 2015Q2, 2015Q3, 2015Q4,
+             2016Q1, 2016Q2, 2016Q3, 2016Q4, 2017Q1, 2017Q2, 2017Q3, 2017Q4,
+             2018Q1, 2018Q2, 2018Q3, 2018Q4, 2019Q1, 2019Q2, 2019Q3, 2019Q4,
+             2020Q1, 2020Q3, 2022Q1, 2022Q3, 2024Q1, 2024Q3]
+  missing: []                # 2014Q2 added 2026-10-24: all 36 vintages present
+
+panel:
+  snapshot_months: [3, 6, 9, 12]
+  min_loan_age: 6            # current_actual_upb is masked (0.00) for roughly the first 6 months
+  loan_sample_rate: 0.15     # deterministic, by hash of loan_identifier
+  sample_seed: 20261023
+  y2_negative_subsampling:   # fallback if Y2 has too few positives in train
+    trigger_min_train_events: 5000   # triggered: 3,176 Y2 events in the 15 % train (stage 1)
+    negatives_rate: 0.2      # r; negatives get weight 1/r, then recalibrate on unweighted validation
+    negatives_rate_sensitivity: [0.1, 0.5]
+    applies_to: [y1, y2]     # same scheme for Y1
+  train_full:                # train vintages ingested at 100 %, used ONLY for train
+    vintages: [2012Q1, 2012Q3, 2014Q1, 2014Q2, 2014Q3, 2014Q4]   # observations (t <= train end);
+    sample_rate: 1.0         # validation / test stay on the 15 % hash sample; holdout loans excluded
+
+labels:
+  early_default:             # Y1
+    horizon_months: 12
+    population_max_dpd: 0    # current at t: the warning comes before any delinquency is visible
+    exclude_after_default: true   # a loan that was 90+ before t (cured since) is out: Y1 is the first default
+    event_min_dpd: 3         # 90+ DPD
+    default_zero_balance_codes: ["02", "03", "09", "15"]
+    prepayment_label: 0      # code 01 within horizon, competing risk; sensitivity drops these rows
+  hidden_deterioration:      # Y2
+    horizon_months: 12
+    population_dpd: 0
+    clean_history_months: 12 # no 30+ DPD in the preceding 12 months
+    event_min_dpd: 2         # 60+ DPD
+    strict_window: [6, 12]   # sensitivity variant
+    prepayment_label: 0
+
+exposure:
+  loss_weight: log1p_upb     # primary: ln(1 + UPB), normalised to mean 1 on train
+  loss_weight_alt: linear_upb_capped_p99
+  normalise_to_mean_one: true
+  lgd:
+    method: segment_mean     # MTM LTV bucket at liquidation x judicial / non-judicial state
+    min_liquidations_per_segment: 200   # merge adjacent LTV buckets below it (all 12 pass)
+    # liquidations completed (zero balance and disposition) by split.train.end,
+    # from ALL vintages incl. 2006-2008 (downturn LGD); crisis vintages are not used for PD.
+    sample: all_vintages_completed_by_train_end
+    floor: 0.0
+    # gross of mortgage insurance (credit_enhancement_proceeds not deducted);
+    # costs and recoveries discounted at the note rate from the last paid instalment to
+    # disposition; segment by MTM LTV at default for estimation, current MTM LTV when applied
+    definition: gross_of_mi
+    discounting: note_rate_lpi_to_disposition
+    segment_ltv: at_default
+    sensitivity: [after_mi, undiscounted, train_vintages_only, constant]
+
+split:                       # by observation date t, 12-month embargo between sets; vintages = available ranges
+  train: {start: "2013-03", end: "2015-06", vintages: {from: 2012Q1, to: 2014Q4}}
+  validation: {start: "2016-06", end: "2017-03", vintages: {from: 2012Q1, to: 2016Q3}}
+  test: {start: "2018-03", end: "2018-12", vintages: {from: 2012Q1, to: 2018Q2}}
+  loan_holdout_share: 0.20   # loan-disjoint robustness check
+  new_cohorts_in_test: {from: 2015Q1, to: 2018Q2}   # absent from train, reported separately
+  # 2017 hurricanes (Harvey, Irma, Maria) fall into the label windows of these
+  # validation dates; flagged rows are left out of calibration and tuning (sensitivity: with them)
+  validation_exclusions:
+    hurricanes_2017: {states: [TX, FL, PR, VI], dates: ["2016-12", "2017-03"]}
+  vintage_robustness:        # pre-COVID check, 2014-2017 vs 2018
+    train_vintages: [2014, 2015, 2016, 2017]
+    validation_vintages: [2018]
+    test_vintages: []        # 2019 vintages are only seen with COVID in the window -> stress.covid
+    max_obs_date: "2019-02"  # last label window (t = 2018-12) ends before 2020
+  stress:                    # evaluation only: no training or recalibration
+    covid: {start: "2019-03", end: "2021-12", vintages: {from: 2012Q1, to: 2020Q3}}
+    gfc: {start: "2007-03", end: "2010-12", vintages: {from: 2006Q1, to: 2008Q3}}
+    rates: {start: "2022-03", end: "2025-03", vintages: {from: 2012Q1, to: 2024Q3}}
+
+external:                  # downloaded by scripts/download_external.py, manifest in data/external/
+  fhfa_hpi: [zip3_quarterly, state_quarterly]   # all-transactions NSA; FHFA has no monthly state index
+  bls_laus: state_monthly    # SA unemployment rate, BLS API v1
+  pmms: freddie_mac_30y_fixed_monthly           # monthly mean of the weekly survey
+  # Publication lags: at date t only data published by t is used.
+  hpi_lag_months: 3          # quarter of month t-3: e.g. t = 2015-06 uses 2015Q1 (released late May)
+  unemployment_lag_months: 1 # state LAUS for month M is released around the 20th of M+1
+  pmms_lag_months: 0         # weekly survey, the month's average is known at its end
+
+features:
+  windows_months: [6, 12]    # trailing behavioural windows, month t included
+  curtailment_min_usd: 50    # excess principal over schedule counted as a partial prepayment if
+  curtailment_min_share: 0.1 # > max(min_usd, min_share x scheduled principal)
+
+alert:                       # early-warning list (H1, H3, H4): calibrated PD >= threshold
+  pd_threshold: 0.01         # about 5x the average PD; PD >= 0.5 gave almost no alerts on current loans
+  pd_threshold_sensitivity: [0.02, 0.005]
+
+lgd_segments:                # for liquidation counts per segment (methodology 2.3)
+  mtm_ltv_buckets: [60, 80, 90, 100, 120]   # edges: <60, 60-80, 80-90, 90-100, 100-120, 120+
+  # States where foreclosure goes mainly through the courts. Provisional: to be replaced
+  # with the Fannie Mae Servicing Guide exhibit "Foreclosure Time Frames and Compensatory Fee
+  # Allowable Delays" (saved manually to data/reference/; the site blocks scripts)
+  judicial_states: [CT, DE, FL, HI, IL, IN, IA, KS, KY, LA, ME, NE, NJ, NM, NY, ND, OH, OK, PA,
+                    SC, SD, VT, WI, PR]
+
+stage2:                      # stability rules of stage 2
+  psi_max: 0.25              # applies to feature groups below only
+  psi_rule_groups: [borrower, loan, geography, exposure, behaviour, state_at_t]
+  macro_rule: sign_and_strength_stable_by_year   # plus *_rel_us versions preferred
+  high_cardinality_top_n: {servicer_name: 20, seller_name: 20}   # rest -> "other", or drop
+
+audit:
+  psi_bins: 10               # quantile bins fitted on train
+  leakage_check:             # quick CatBoost train (train_full, r from panel) -> validation
+    iterations: 300
+    depth: 6
+    auc_stop: 0.97

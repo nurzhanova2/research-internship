@@ -1,0 +1,9 @@
+,H3
+delta_auc,0.015171021903338633
+delta_ci,[0.0130; 0.0173]
+delong_p,1.4647677370616856e-42
+auc_part,True
+median_lead,10.0
+median_lead_ci,[10; 10]
+lead_part,True
+H3,confirmed

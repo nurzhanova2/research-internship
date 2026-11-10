@@ -1,0 +1,16 @@
+period,zero_balance_code,len
+gfc_vintages_by_train_end,02,2572
+gfc_vintages_by_train_end,03,18279
+gfc_vintages_by_train_end,09,47739
+gfc_vintages_by_train_end,15,2
+gfc_vintages_later,02,2240
+gfc_vintages_later,03,1250
+gfc_vintages_later,09,9246
+gfc_vintages_later,15,5021
+post_2012_later,02,9164
+post_2012_later,03,1690
+post_2012_later,09,11130
+post_2012_later,15,5215
+train_period,02,56
+train_period,03,63
+train_period,09,251
