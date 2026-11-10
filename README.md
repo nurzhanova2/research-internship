@@ -64,9 +64,9 @@ Sources: [`comparison_table.csv`](Неделя_07_Базовые_модели/ta
 | [03](Неделя_03_Сравнение_подходов) | Analytical stage | comparison table of credit-risk models and XAI methods |
 | [04](Неделя_04_Данные) | Data collection | data description, data audit report, dictionary of 59 features, audit notebook and tables |
 | [05](Неделя_05_Очистка_и_признаки) | Data preparation | feature selection 59 → 18: description, report, 10 notebooks, tables |
-| [06](Неделя_06_Разведочный_анализ) | Exploratory analysis | EDA notebook, 7 figures, tables |
+| [06](Неделя_06_Разведочный_анализ) | Exploratory analysis | EDA notebook, 7 figures, tables; description — section 5.1 of the [chapter on EDA and model interpretation](Неделя_08_Объяснимый_ИИ/Разведочный_анализ_и_интерпретация_модели.md) (in week 08) |
 | [07](Неделя_07_Базовые_модели) | Modelling | models and test results, test protocol, 11 notebooks, metric tables, figure and its script |
-| [08](Неделя_08_Объяснимый_ИИ) | Modelling (XAI) | SHAP and LIME notebook, 5 figures, tables |
+| [08](Неделя_08_Объяснимый_ИИ) | Modelling (XAI) | [chapter on EDA and model interpretation](Неделя_08_Объяснимый_ИИ/Разведочный_анализ_и_интерпретация_модели.md), SHAP and LIME notebook, 5 figures, tables |
 | [09](Неделя_09_Аналитическая_записка) | Analysis of results | analytical note with interim conclusions and plan |
 | [10](Неделя_10_Отчет) | Final stage | research internship report (.docx) |
 
@@ -113,7 +113,7 @@ cd .. && uv run --project code python Неделя_07_Базовые_модел�
 ├── Неделя_05_Очистка_и_признаки/     # cleaning and feature selection
 ├── Неделя_06_Разведочный_анализ/     # exploratory data analysis
 ├── Неделя_07_Базовые_модели/         # baseline models, test, stress tests
-├── Неделя_08_Объяснимый_ИИ/          # SHAP and LIME
+├── Неделя_08_Объяснимый_ИИ/          # EDA and interpretation chapter, SHAP and LIME
 ├── Неделя_09_Аналитическая_записка/  # analytical note
 ├── Неделя_10_Отчет/                  # internship report
 │     each week: notebooks/ · tables/ · figures/ where present
